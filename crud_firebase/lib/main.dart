@@ -1,10 +1,6 @@
-import 'package:crud_firebase/pages/add_data.dart';
-import 'package:crud_firebase/pages/edit_data.dart';
-import 'package:crud_firebase/pages/home_page.dart';
-import 'package:crud_firebase/pages/page_404.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:crud_firebase/pages/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,16 +9,18 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final _routes = {
+    '/': (context) => const Home(),
+    '/add': (context) => const AddData(),
+    '/edit': (context) => const EditData(),
+  };
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Crud Firebase',
       initialRoute: '/',
-      routes: {
-        '/': (context) => const Home(),
-        '/add': (context) => const AddData(),
-        '/edit': (context) => const EditData(),
-      },
+      routes: _routes,
       onGenerateRoute: (settings) {
         return MaterialPageRoute(builder: (context) => const Page404());
       },
