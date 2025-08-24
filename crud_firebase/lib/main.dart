@@ -1,6 +1,7 @@
 import 'package:crud_firebase/pages/add_data.dart';
 import 'package:crud_firebase/pages/edit_data.dart';
 import 'package:crud_firebase/pages/home_page.dart';
+import 'package:crud_firebase/pages/page_404.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Home(),
         '/add': (context) => const AddData(),
         '/edit': (context) => const EditData(),
+      },
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(builder: (context) => const Page404());
       },
     );
   }
