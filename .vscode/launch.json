@@ -23,6 +23,20 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
+        },
+        {
+            "name": "Flutter (lib/Models/contacs.dart)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "crud_sqlite",
+            "program": "lib/Models/contacs.dart"
+        },
+        {
+            "name": "Flutter (lib/pages/contacts.dart)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "crud_sqlite",
+            "program": "lib/pages/contacts.dart"
         }
     ]
 }

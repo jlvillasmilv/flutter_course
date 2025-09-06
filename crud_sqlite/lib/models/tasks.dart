@@ -1,0 +1,25 @@
+class Task {
+  final int id;
+  final int contactId;
+  final String title;
+  final String description;
+  final int isCompleted;
+
+  const Task({
+    required this.id,
+    required this.contactId,
+    required this.title,
+    required this.description,
+    required this.isCompleted,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'contactId': contactId,
+      'title': title,
+      'description': description,
+      'isCompleted': isCompleted,
+    };
+  }
+}

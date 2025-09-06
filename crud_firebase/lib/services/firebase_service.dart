@@ -28,3 +28,7 @@ Future<void> updateData(String id, String name) async {
 Future<void> deleteData(String id) async {
   await db.collection("people").doc(id).delete();
 }
+
+Future<void> signInAnonymously(String id) async {
+  await db.collection("people").doc(id).delete();
+}
