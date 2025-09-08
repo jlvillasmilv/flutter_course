@@ -1,23 +1,22 @@
-import 'package:crud_firebase/services/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:crud_firebase/services/firebase_auth.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+class _RegisterState extends State<Register> {
+  TextEditingController emailController = TextEditingController(text: '');
+  TextEditingController passwordController = TextEditingController(text: '');
   final FirebaseAuthService authService = FirebaseAuthService();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login', style: TextStyle(color: Colors.white)),
+        title: Text('Register', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.purple,
       ),
       body: Padding(
@@ -45,31 +44,21 @@ class _LoginState extends State<Login> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                var result = await authService.signIn(
-                  emailController.text,
-                  passwordController.text,
-                );
-                print(result);
-
-                if (result == 1) {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text('Invalid email')));
-                } else if (result == 2) {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text('Weak password')));
-                } else if (result != null) {
-                  Navigator.pushNamed(context, '/');
-                }
+                await authService
+                    .register(emailController.text, passwordController.text)
+                    .then((value) {
+                      if (value != null) {
+                        Navigator.pushNamed(context, '/login');
+                      }
+                    });
               },
-              child: Text('Login'),
+              child: Text('Register'),
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/register');
+                Navigator.pushNamed(context, '/login');
               },
-              child: Text('You don\'t have an account?'),
+              child: Text('You have an account?'),
             ),
           ],
         ),

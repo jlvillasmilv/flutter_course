@@ -13,13 +13,15 @@ class MyApp extends StatelessWidget {
     '/': (context) => const Home(),
     '/add': (context) => const AddData(),
     '/edit': (context) => const EditData(),
+    '/login': (context) => const Login(),
+    '/register': (context) => const Register(),
   };
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Crud Firebase',
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: _routes,
       onGenerateRoute: (settings) {
         return MaterialPageRoute(builder: (context) => const Page404());
