@@ -47,9 +47,7 @@ class _RegisterState extends State<Register> {
                 await authService
                     .register(emailController.text, passwordController.text)
                     .then((value) {
-                      if (value != null) {
-                        Navigator.pushNamed(context, '/login');
-                      }
+                      handleRegisterResult(value, context);
                     });
               },
               child: Text('Register'),
@@ -62,6 +60,33 @@ class _RegisterState extends State<Register> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+void handleRegisterResult(result, BuildContext context) {
+  print(result);
+  const errorMessages = {
+    1: 'Invalid email',
+    2: 'weak-password',
+    3: 'email-already-in-use',
+  };
+
+  if (result != null && errorMessages.containsKey(result)) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(errorMessages[result]!),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  } else if (result != null) {
+    Navigator.pushNamed(context, '/login');
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('An unexpected error occurred. Please try again.'),
+        duration: const Duration(seconds: 2),
       ),
     );
   }

@@ -49,19 +49,8 @@ class _LoginState extends State<Login> {
                   emailController.text,
                   passwordController.text,
                 );
-                print(result);
 
-                if (result == 1) {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text('Invalid email')));
-                } else if (result == 2) {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text('Weak password')));
-                } else if (result != null) {
-                  Navigator.pushNamed(context, '/');
-                }
+                handleLoginResult(result, context);
               },
               child: Text('Login'),
             ),
@@ -73,6 +62,33 @@ class _LoginState extends State<Login> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+void handleLoginResult(result, BuildContext context) {
+  print(result);
+  const errorMessages = {
+    1: 'Invalid email',
+    2: 'User not found',
+    3: 'Wrong password',
+  };
+
+  if (result != null && errorMessages.containsKey(result)) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(errorMessages[result]!),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  } else if (result != null) {
+    Navigator.pushNamed(context, '/');
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('An unexpected error occurred. Please try again.'),
+        duration: const Duration(seconds: 2),
       ),
     );
   }
