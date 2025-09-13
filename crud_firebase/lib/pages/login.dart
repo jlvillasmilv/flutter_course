@@ -83,12 +83,17 @@ void handleLoginResult(result, BuildContext context) {
       ),
     );
   } else if (result != null) {
-    Navigator.pushNamed(context, '/');
+    // Replace the entire navigation stack with the home screen
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/',
+      (Route<dynamic> route) => false, // This removes all previous routes
+    );
   } else {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text('An unexpected error occurred. Please try again.'),
-        duration: const Duration(seconds: 2),
+        duration: Duration(seconds: 2),
       ),
     );
   }

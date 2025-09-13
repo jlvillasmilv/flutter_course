@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:crud_firebase/services/firebase_service.dart';
 
@@ -15,6 +16,18 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text('Crud Firebase', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.purple,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () async {
+              //do you want logout
+              // showAboutDialog(context: context);
+
+              FirebaseAuth.instance.signOut();
+              Navigator.pushNamed(context, '/login');
+            },
+          ),
+        ],
       ),
       body: FutureBuilder(
         future: getData(),
