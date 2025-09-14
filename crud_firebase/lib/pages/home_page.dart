@@ -20,11 +20,33 @@ class _HomeState extends State<Home> {
           IconButton(
             icon: Icon(Icons.logout),
             onPressed: () async {
-              //do you want logout
-              // showAboutDialog(context: context);
-
-              FirebaseAuth.instance.signOut();
-              Navigator.pushNamed(context, '/login');
+              await showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('Logout'),
+                    content: Text('¿Are you sure you want to logout?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        },
+                        child: Text(
+                          'Cancelar',
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          FirebaseAuth.instance.signOut();
+                          Navigator.pop(context, true);
+                        },
+                        child: Text('Logout'),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
           ),
         ],
