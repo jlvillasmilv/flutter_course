@@ -59,11 +59,8 @@ class _MyAppState extends State<MyApp> {
             ),
             initialRoute: isLoggedIn ? '/' : '/login',
             routes: {
-              // Public routes
               '/login': (context) => const Login(),
               '/register': (context) => const Register(),
-
-              // Protected routes - wrapped in a builder to handle redirection
               '/': (context) => _buildProtectedRoute(context, const Home()),
               '/add': (context) =>
                   _buildProtectedRoute(context, const AddData()),

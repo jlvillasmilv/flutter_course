@@ -5,3 +5,4 @@ export 'package:crud_firebase/pages/login.dart';
 export 'package:crud_firebase/pages/page_404.dart';
 export 'package:crud_firebase/pages/register.dart';
 export 'package:firebase_core/firebase_core.dart';
+export 'package:crud_firebase/widgets/app_bar.dart';

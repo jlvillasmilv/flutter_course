@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:crud_firebase/services/firebase_service.dart';
+import 'package:crud_firebase/widgets/app_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -16,41 +17,8 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text('Crud Firebase', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.purple,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: () async {
-              await showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: Text('Logout'),
-                    content: Text('¿Are you sure you want to logout?'),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context, false);
-                        },
-                        child: Text(
-                          'Cancelar',
-                          style: TextStyle(color: Colors.red),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          FirebaseAuth.instance.signOut();
-                          Navigator.pop(context, true);
-                        },
-                        child: Text('Logout'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
-        ],
       ),
+      drawer: AppBarWidget(),
       body: FutureBuilder(
         future: getData(),
         builder: (context, snapshot) {
