@@ -44,6 +44,20 @@ class FirebaseAuthService {
     }
   }
 
+  Future changePassword(String password) async {
+    try {
+      await _auth.currentUser!.updatePassword(password);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
+        return 1;
+      } else if (e.code == 'weak-password') {
+        return 2;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
   Future<void> signOut() async {
     try {
       await _auth.signOut();

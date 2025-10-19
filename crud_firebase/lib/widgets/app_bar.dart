@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -18,13 +20,30 @@ class AppBarWidget extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: BoxDecoration(color: Colors.purple),
-            child: Text(user!.displayName!),
+            child: Text(user!.email!),
           ),
           ListTile(
-            title: const Text('Item 1'),
+            title: const Text('Contacts'),
+            leading: Icon(Icons.contacts),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/');
+            },
+          ),
+          ListTile(
+            title: const Text('Settings'),
+            leading: Icon(Icons.settings),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/');
+            },
+          ),
+          ListTile(
+            title: const Text('Change Password'),
+            leading: Icon(Icons.lock),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/change-password');
             },
           ),
           ListTile(

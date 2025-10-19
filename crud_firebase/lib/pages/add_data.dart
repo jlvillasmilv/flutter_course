@@ -1,3 +1,4 @@
+import 'package:crud_firebase/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:crud_firebase/services/firebase_service.dart';
 
@@ -14,7 +15,8 @@ class _AddDataState extends State<AddData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Ingresa datos')),
+      appBar: AppBar(title: Text('Add Data'), backgroundColor: Colors.purple),
+      drawer: AppBarWidget(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

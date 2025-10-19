@@ -61,6 +61,7 @@ class _MyAppState extends State<MyApp> {
             routes: {
               '/login': (context) => const Login(),
               '/register': (context) => const Register(),
+              '/change-password': (context) => const ChangePassword(),
               '/': (context) => _buildProtectedRoute(context, const Home()),
               '/add': (context) =>
                   _buildProtectedRoute(context, const AddData()),
